@@ -1,0 +1,16 @@
+\frametitle{C Code}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double Ax=2, Ay=-1;
+    double Dx=2.5, Dy=-0.5;
+
+    double AD = sqrt((Ax-Dx)*(Ax-Dx) + (Ay-Dy)*(Ay-Dy));
+    double a = (2 * AD) / sqrt(3);
+
+    printf("Side length = %lf\n", a);
+    return 0;
+}
+\end{lstlisting}

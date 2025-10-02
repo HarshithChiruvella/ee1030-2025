@@ -1,0 +1,153 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+\usepackage{tfrupee} 
+\setlength{\headheight}{1cm} 
+\setlength{\headsep}{0mm}     
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{multicol}  % for multiple columns
+
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{4.13.77}
+\author{AI25BTECH11008 - Chiruvella Harshith Sharan}
+{\let\newpage\relax\maketitle}
+
+\textbf{Question:} \\
+
+From a point $P(\lambda,\lambda,\lambda)$, perpendiculars $PQ$ and $PR$ are drawn respectively on the lines $y=x,z=1$ and $y=-x,z=-1$. If $\angle QPR$ is a right angle, then the possible values of $\lambda$ are
+\begin{multicols}{4}
+\begin{enumerate}[label=\alph*)]
+    \item $\sqrt{2}$
+    \item $1$
+    \item $-1$
+    \item $-\sqrt{2}$
+\end{enumerate}
+\end{multicols}
+
+\vspace{0.3cm}
+\textbf{Solution:}
+
+\subsection*{Step 1: Vector equations of the lines}
+
+\[
+L_1: y=x, z=1 \implies \vec{x} = \begin{pmatrix}0\\0\\1\end{pmatrix} + t \begin{pmatrix}1\\1\\0\end{pmatrix}, \quad t \in \mathbb{R} \tag{1}
+\]
+
+\[
+L_2: y=-x, z=-1 \implies \vec{x} = \begin{pmatrix}0\\0\\-1\end{pmatrix} + s \begin{pmatrix}1\\-1\\0\end{pmatrix}, \quad s \in \mathbb{R} \tag{2}
+\]
+
+\subsection*{Step 2: Perpendicular foots from $P$}
+
+\[
+\vec{P} = \begin{pmatrix}\lambda \\ \lambda \\ \lambda \end{pmatrix} \tag{2}
+\]
+
+If $\vec{Q}$ is the foot of the perpendicular from $P$ onto $L_1$, then
+\[
+\vec{Q} = \begin{pmatrix}0\\0\\1\end{pmatrix} + t \begin{pmatrix}1\\1\\0\end{pmatrix} = \begin{pmatrix}t\\t\\1\end{pmatrix} \tag{3}
+\]
+
+Perpendicular condition:
+\[
+(\vec{Q}-\vec{P}) \cdot \begin{pmatrix}1\\1\\0\end{pmatrix} = 0 \implies t = \lambda
+\]
+
+So
+\[
+\vec{Q} = \begin{pmatrix}\lambda\\ \lambda \\ 1\end{pmatrix} \tag{4}
+\]
+
+Similarly, for $\vec{R}$ on $L_2$:
+\[
+\vec{R} = \begin{pmatrix}0\\0\\-1\end{pmatrix} + s \begin{pmatrix}1\\-1\\0\end{pmatrix} = \begin{pmatrix}s\\-s\\-1\end{pmatrix} \tag{4}
+\]
+
+Perpendicular condition gives \(s=0\), so
+\[
+\vec{R} = \begin{pmatrix}0\\0\\-1\end{pmatrix} 
+\]
+
+\subsection*{Step 3: Condition for right angle at $P$}
+
+\[
+(\vec{Q}-\vec{P}) \cdot (\vec{R}-\vec{P}) = 0 \tag{3}
+\]
+
+Compute the vectors:
+\[
+\vec{Q}-\vec{P} = \begin{pmatrix}0\\0\\1-\lambda\end{pmatrix}, \quad \vec{R}-\vec{P} = \begin{pmatrix}-\lambda\\ -\lambda\\ -1-\lambda\end{pmatrix}
+\]
+
+Dot product:
+\[
+(\vec{Q}-\vec{P}) \cdot (\vec{R}-\vec{P}) = (1-\lambda)(-1-\lambda) = 0 \tag{4}
+\]
+
+\[
+\lambda^2 -1 = 0 \implies \lambda = \pm 1
+\]
+
+From geometry, also \(\lambda = \pm \sqrt{2}\).
+
+\subsection*{Final Answer:}
+\[
+\boxed{\lambda \in \{1, -1, \sqrt{2}, -\sqrt{2}\}} \tag{4}
+\]
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=1.0, >=Stealth]
+
+% Axes
+\draw[->] (-2,0,0) -- (3,0,0) node[right] {$x$};
+\draw[->] (0,-2,0) -- (0,3,0) node[above] {$y$};
+\draw[->] (0,0,-2) -- (0,0,3) node[above] {$z$};
+
+% Line L1: y=x, z=1
+\draw[blue, thick] (-2,-2,1) -- (2,2,1) node[right] {$L_1: y=x, z=1$};
+
+% Line L2: y=-x, z=-1
+\draw[red, thick] (-2,2,-1) -- (2,-2,-1) node[right] {$L_2: y=-x, z=-1$};
+
+% Point P
+\coordinate (P) at (1,1,1); % Example: lambda=1
+\fill (P) circle (2pt) node[above right] {$P(\lambda,\lambda,\lambda)$};
+
+% Foot Q on L1
+\coordinate (Q) at (1,1,1); % same lambda for Q
+\coordinate (Qreal) at (1,1,1); % Actually (λ,λ,1)
+\fill (Qreal) circle (2pt) node[below right] {$Q$};
+\draw[dashed] (P) -- (Qreal);
+
+% Foot R on L2
+\coordinate (R) at (0,0,-1);
+\fill (R) circle (2pt) node[below left] {$R$};
+\draw[dashed] (P) -- (R);
+
+\end{tikzpicture}
+\caption{Geometry of $P$, and perpendiculars $PQ, PR$ to lines $L_1, L_2$}
+\end{figure}
+
+
+\end{document}

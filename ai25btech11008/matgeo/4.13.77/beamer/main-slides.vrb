@@ -1,0 +1,15 @@
+\frametitle{C Code}
+\begin{lstlisting}[language=C]
+
+
+        // Print result
+        if(fabs(dot) < 1e-6) {
+            printf("lambda = %.3f is VALID (Right angle satisfied)\n", lambda);
+        } else {
+            printf("lambda = %.3f is NOT valid (Dot product = %.3f)\n", lambda, dot);
+        }
+    }
+
+    return 0;
+}
+\end{lstlisting}

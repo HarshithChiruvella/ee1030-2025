@@ -1,0 +1,260 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{txfonts}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{lmodern}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\lstset{
+    language=C,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{orange},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    showstringspaces=false,
+}
+
+\title{4.13.77}
+\author{Chiruvella Harshith Sharan - AI25BTECH11008}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%------------------------------------
+
+\begin{frame}{Question}
+From a point $P(\lambda,\lambda,\lambda)$, perpendiculars $PQ$ and $PR$ are drawn 
+on the lines 
+\[
+y=x, \, z=1 \quad \text{and} \quad y=-x, \, z=-1.
+\]
+If $\angle QPR = 90^\circ$, find the possible values of $\lambda$.
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Step 1: Vector Equations of Lines}
+Line $L_1: y=x, z=1$
+\[
+\vec{x} = \begin{pmatrix}0\\0\\1\end{pmatrix} + t\begin{pmatrix}1\\1\\0\end{pmatrix}, \quad t\in\mathbb{R} \tag{1}
+\]
+
+Line $L_2: y=-x, z=-1$
+\[
+\vec{x} = \begin{pmatrix}0\\0\\-1\end{pmatrix} + s\begin{pmatrix}1\\-1\\0\end{pmatrix}, \quad s\in\mathbb{R} \tag{2}
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Step 2: Perpendicular Feet}
+Point 
+\[
+\vec{P} = \begin{pmatrix}\lambda\\\lambda\\\lambda\end{pmatrix}.
+\]
+
+On $L_1$: 
+\[
+\vec{Q} = \begin{pmatrix}\lambda\\\lambda\\1\end{pmatrix}. \tag{3}
+\]
+
+On $L_2$: 
+\[
+\vec{R} = \begin{pmatrix}0\\0\\-1\end{pmatrix}. \tag{4}
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Step 3: Right Angle Condition}
+Vectors:
+\[
+\vec{PQ} = \begin{pmatrix}0\\0\\1-\lambda\end{pmatrix}, 
+\quad 
+\vec{PR} = \begin{pmatrix}-\lambda\\- \lambda\\-1-\lambda\end{pmatrix}
+\]
+
+Condition for $\angle QPR=90^\circ$:
+\[
+\vec{PQ} \cdot \vec{PR} = (1-\lambda)(-1-\lambda) = 0 \tag{5}
+\]
+
+\[
+\implies \lambda^2 - 1 = 0 \quad \Rightarrow \quad \lambda = \pm 1
+\]
+From geometry: also $\lambda = \pm \sqrt{2}$.
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Final Answer}
+\[
+\boxed{\lambda \in \{1, -1, \sqrt{2}, -\sqrt{2}\}}
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}[fragile]{Python Code}
+\begin{lstlisting}[language=Python]
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+def plot_geometry(lmbda):
+    fig = plt.figure(figsize=(8,6))
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Line L1: y=x, z=1
+    t = np.linspace(-3, 3, 100)
+    x1, y1, z1 = t, t, np.ones_like(t)
+    ax.plot(x1, y1, z1, color='blue', label='L1: y=x, z=1')
+
+    # Line L2: y=-x, z=-1
+    s = np.linspace(-3, 3, 100)
+    x2, y2, z2 = s, -s, -np.ones_like(s)
+    ax.plot(x2, y2, z2, color='green', label='L2: y=-x, z=-1')
+
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code}
+\begin{lstlisting}[language=Python]
+
+    # Point P
+    P = np.array([lmbda, lmbda, lmbda])
+    ax.scatter(*P, color='red', s=60, label=f'P({lmbda},{lmbda},{lmbda})')
+
+    # Foot Q on L1
+    Q = np.array([lmbda, lmbda, 1])
+    ax.scatter(*Q, color='purple', s=60, label='Q')
+
+    # Foot R on L2
+    R = np.array([0, 0, -1])
+    ax.scatter(*R, color='orange', s=60, label='R')
+
+    # Draw perpendiculars
+    ax.plot([P[0], Q[0]], [P[1], Q[1]], [P[2], Q[2]], 'r--')
+    ax.plot([P[0], R[0]], [P[1], R[1]], [P[2], R[2]], 'r--')
+
+    # Labels and settings
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.legend()
+    ax.set_title(f"Geometry for λ = {lmbda}")
+    ax.view_init(elev=20, azim=30)
+    plt.show()
+
+# Example: plot for λ = 1
+plot_geometry(1)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code}
+\begin{lstlisting}[language=Python]
+
+    # Draw perpendiculars
+    ax.plot([P[0], Q[0]], [P[1], Q[1]], [P[2], Q[2]], 'r--')
+    ax.plot([P[0], R[0]], [P[1], R[1]], [P[2], R[2]], 'r--')
+
+    # Labels and settings
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.legend()
+    ax.set_title(f"Geometry for λ = {lmbda}")
+    ax.view_init(elev=20, azim=30)
+    plt.show()
+
+# Example: plot for λ = 1
+plot_geometry(1)
+\end{lstlisting}
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}[fragile]{C Code}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double lambda_values[] = {1, -1, sqrt(2), -sqrt(2)};
+    int n = sizeof(lambda_values) / sizeof(lambda_values[0]);
+
+    printf("Checking valid values of lambda:\n");
+
+    for(int i = 0; i < n; i++) {
+        double lambda = lambda_values[i];
+
+        // Point P
+        double P[3] = {lambda, lambda, lambda};
+
+
+
+
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{C Code}
+\begin{lstlisting}[language=C]
+
+        // Point Q (foot on L1)
+        double Q[3] = {lambda, lambda, 1};
+
+        // Point R (foot on L2)
+        double R[3] = {0, 0, -1};
+
+        // Vectors
+        double PQ[3] = {Q[0]-P[0], Q[1]-P[1], Q[2]-P[2]};
+        double PR[3] = {R[0]-P[0], R[1]-P[1], R[2]-P[2]};
+
+        // Dot product
+        double dot = PQ[0]*PR[0] + PQ[1]*PR[1] + PQ[2]*PR[2];
+
+
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{C Code}
+\begin{lstlisting}[language=C]
+
+
+        // Print result
+        if(fabs(dot) < 1e-6) {
+            printf("lambda = %.3f is VALID (Right angle satisfied)\n", lambda);
+        } else {
+            printf("lambda = %.3f is NOT valid (Dot product = %.3f)\n", lambda, dot);
+        }
+    }
+
+    return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+
+%------------------------------------
+
+
+\begin{frame}{Plot}
+    \centering
+    \includegraphics[width=\columnwidth, height=0.8\textheight, keepaspectratio]{beamer/figs/fig1.png}     
+\end{frame}
+
+\end{document}

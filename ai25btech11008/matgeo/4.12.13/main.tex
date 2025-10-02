@@ -1,0 +1,141 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+\usepackage{tfrupee} 
+
+\setlength{\headheight}{1cm} 
+\setlength{\headsep}{0mm}     
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{listings}
+\def\inputGnumericTable{}                                 
+\usepackage[latin1]{inputenc}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                       
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}                                           
+\usepackage{lscape}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,angles,quotes}
+
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{4.12.13}
+\author{AI25BTECH11008 - Chiruvella Harshith Sharan}
+{\let\newpage\relax\maketitle}
+
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+\setlength{\intextsep}{10pt} 
+
+\numberwithin{equation}{enumi}
+\numberwithin{figure}{enumi}
+\renewcommand{\thetable}{\theenumi}
+
+\textbf{Question:} \\
+
+\vspace{0.3cm}
+
+If the equation of the base of an equilateral triangle is $x+y=2$ and the vertex is $(2,-1)$, then find the length of the side of the triangle.
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+\subsection*{\textbf{Step 1: Represent the problem in vector form}}
+
+The equation of the base of the triangle is
+\begin{align}
+\vec{n}^T \vec{x} = 2
+\end{align}
+where $\vec{n} = \begin{pmatrix}1 \\ 1\end{pmatrix}$ is the normal vector.  
+The vertex is 
+\[
+\vec{A} = \begin{pmatrix}2 \\ -1\end{pmatrix}.
+\]
+
+\subsection*{\textbf{Step 2: Foot of perpendicular from vertex to base}}
+
+The distance from $\vec{A}$ to the line is obtained by projecting $\vec{A}$ onto the normal:
+\begin{align}
+d = \frac{\vec{n}^T \vec{A} - 2}{\|\vec{n}\|} 
+= \frac{1\cdot 2 + 1\cdot (-1) - 2}{\sqrt{1^2+1^2}} 
+= \frac{-1}{\sqrt{2}}
+\end{align}
+
+Hence, the foot of perpendicular $\vec{D}$ is:
+\begin{align}
+\vec{D} = \vec{A} - d \frac{\vec{n}}{\|\vec{n}\|} 
+= \begin{pmatrix}2 \\ -1\end{pmatrix} - \left(-\tfrac{1}{\sqrt{2}}\right)\frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 1\end{pmatrix} 
+= \begin{pmatrix}2+\tfrac{1}{2} \\ -1+\tfrac{1}{2}\end{pmatrix}
+= \begin{pmatrix}\tfrac{5}{2} \\ -\tfrac{1}{2}\end{pmatrix}
+\end{align}
+
+\subsection*{\textbf{Step 3: Length relation in equilateral triangle}}
+
+In an equilateral triangle, the altitude length $AD$ is related to the side $a$ by:
+\begin{align}
+AD = \frac{\sqrt{3}}{2} a
+\end{align}
+
+Here $AD = \|\vec{A}-\vec{D}\|$.  
+
+\[
+AD = \sqrt{\left(2-\tfrac{5}{2}\right)^2 + \left(-1+\tfrac{1}{2}\right)^2}
+= \sqrt{\left(-\tfrac{1}{2}\right)^2 + \left(-\tfrac{1}{2}\right)^2}
+= \sqrt{\tfrac{1}{4}+\tfrac{1}{4}} 
+= \frac{1}{\sqrt{2}}
+\]
+
+\subsection*{\textbf{Step 4: Solve for side length}}
+
+From (3):
+\begin{align}
+\frac{1}{\sqrt{2}} = \frac{\sqrt{3}}{2} a 
+\implies a = \frac{2}{\sqrt{2}\sqrt{3}} 
+= \sqrt{\frac{2}{3}}
+\end{align}
+
+\subsection*{Final Answer:}
+\[
+\boxed{a = \sqrt{\tfrac{2}{3}}}
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1]
+\coordinate (A) at (2,-1);
+\coordinate (D) at (2.5,-0.5);
+\draw[thick] (-2,4) -- (4,-2) node[right]{$x+y=2$};
+\draw[thick] (A) -- (D);
+\fill (A) circle (2pt) node[below right] {$A(2,-1)$};
+\fill (D) circle (2pt) node[right] {$D$};
+\end{tikzpicture}
+\caption{Geometry of equilateral triangle with base $x+y=2$}
+\end{figure}
+
+\end{document}
+
