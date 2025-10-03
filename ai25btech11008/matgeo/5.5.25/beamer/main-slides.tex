@@ -1,0 +1,493 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{txfonts}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{lmodern}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\lstset{
+    language=C,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{orange},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    showstringspaces=false,
+}
+
+\title{5.5.25}
+\author{Chiruvella Harshith Sharan - AI25BTECH11008}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%------------------------------------
+
+\begin{frame}{Question}
+Solve the system using vector algebra:
+\[
+\begin{aligned}
+x + y + z &= 6 \\
+2x + 3y + z &= 10 \\
+x - y + 2z &= 5
+\end{aligned}
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Step 1: Matrix Form}
+System can be written as
+\[
+A\vec{x} = \vec{b} \tag{1}
+\]
+where
+\[
+A = \begin{bmatrix}
+1 & 1 & 1 \\
+2 & 3 & 1 \\
+1 & -1 & 2
+\end{bmatrix}, 
+\quad
+\vec{x} = \begin{bmatrix} x \\ y \\ z \end{bmatrix}, 
+\quad
+\vec{b} = \begin{bmatrix} 6 \\ 10 \\ 5 \end{bmatrix}.
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Step 2: Formula for Inverse}
+The solution is
+\[
+\vec{x} = A^{-1}\vec{b} \tag{2}
+\]
+where
+\[
+A^{-1} = \frac{1}{\det(A)} \, \text{adj}(A).
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Step 3: Computing Inverse}
+\[
+\det(A) = 7 \neq 0
+\]
+
+So inverse exists. After computation,
+\[
+A^{-1} =
+\begin{bmatrix}
+5/7 & 1/7 & -3/7 \\
+1 & -1/7 & -1/7 \\
+-2/7 & 2/7 & 3/7
+\end{bmatrix} \tag{3}
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Step 4: Solution}
+\[
+\vec{x} = A^{-1}\vec{b} =
+\begin{bmatrix}
+5/7 & 1/7 & -3/7 \\
+1 & -1/7 & -1/7 \\
+-2/7 & 2/7 & 3/7
+\end{bmatrix}
+\begin{bmatrix}
+6 \\ 10 \\ 5
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 \\ 2 \\ 3
+\end{bmatrix} \tag{4}
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Final Answer}
+\[
+\boxed{ \vec{x} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} }
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}[fragile]{Python Code}
+\begin{lstlisting}[language=Python]
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+
+# Define column vectors of A
+a1 = np.array([1,2,1])
+a2 = np.array([2,0,2])
+a3 = np.array([-3,-3,0])
+b  = np.array([1,2,3])
+
+# Scaled components from solution x = [2, 1/2, 2/3]
+v1 = 2*a1
+v2 = 0.5*a2
+v3 = (2/3)*a3
+
+# Step-by-step sum points
+origin = np.array([0,0,0])
+p1 = v1
+p2 = v1+v2
+p3 = v1+v2+v3  # should equal b
+
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code}
+\begin{lstlisting}[language=Python]
+
+
+fig = plt.figure(figsize=(8,6))
+ax = fig.add_subplot(111, projection='3d')
+
+# Axes limits
+ax.set_xlim(-4,4)
+ax.set_ylim(-4,4)
+ax.set_zlim(-1,4)
+
+# Plot column vectors
+ax.quiver(0,0,0, *a1, color='blue', label='a1')
+ax.quiver(0,0,0, *a2, color='green', label='a2')
+ax.quiver(0,0,0, *a3, color='red', label='a3')
+ax.quiver(0,0,0, *b,  color='purple', label='b')
+
+# Plot scaled solution vectors
+ax.quiver(0,0,0, *v1, color='blue', alpha=0.5)
+ax.quiver(0,0,0, *v2, color='green', alpha=0.5)
+ax.quiver(0,0,0, *v3, color='red', alpha=0.5)
+
+# Polygonal chain to show addition step by step
+ax.plot([0,p1[0]],[0,p1[1]],[0,p1[2]],'k--')
+ax.plot([p1[0],p2[0]],[p1[1],p2[1]],[p1[2],p2[2]],'k--')
+ax.plot([p2[0],p3[0]],[p2[1],p3[1]],[p2[2],p3[2]],'k--')
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code}
+\begin{lstlisting}[language=Python]
+
+# Labels
+ax.text(*a1, "a1", color='blue')
+ax.text(*a2, "a2", color='green')
+ax.text(*a3, "a3", color='red')
+ax.text(*b, "b", color='purple')
+ax.text(*v1, "2a1", color='blue')
+ax.text(*v2, "1/2 a2", color='green')
+ax.text(*v3, "2/3 a3", color='red')
+
+# Axes labels and title
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.set_zlabel("z")
+ax.legend()
+ax.set_title("3D visualization of 2a1 + (1/2)a2 + (2/3)a3 = b")
+
+plt.show()
+\end{lstlisting}
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}[fragile]{C Code}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+#define N 3  // 3x3 matrix
+
+// Function to calculate determinant of a 3x3 matrix
+float determinant(float A[3][3]) {
+    float det;
+    det = A[0][0]*(A[1][1]*A[2][2] - A[1][2]*A[2][1])
+        - A[0][1]*(A[1][0]*A[2][2] - A[1][2]*A[2][0])
+        + A[0][2]*(A[1][0]*A[2][1] - A[1][1]*A[2][0]);
+    return det;
+}
+
+// Function to find adjoint of 3x3 matrix
+void adjoint(float A[3][3], float adj[3][3]) {
+    adj[0][0] =   (A[1][1]*A[2][2] - A[1][2]*A[2][1]);
+    adj[0][1] = - (A[0][1]*A[2][2] - A[0][2]*A[2][1]);
+    adj[0][2] =   (A[0][1]*A[1][2] - A[0][2]*A[1][1]);
+
+    adj[1][0] = - (A[1][0]*A[2][2] - A[1][2]*A[2][0]);
+    adj[1][1] =   (A[0][0]*A[2][2] - A[0][2]*A[2][0]);
+    adj[1][2] = - (A[0][0]*A[1][2] - A[0][2]*A[1][0]);
+
+    adj[2][0] =   (A[1][0]*A[2][1] - A[1][1]*A[2][0]);
+    adj[2][1] = - (A[0][0]*A[2][1] - A[0][1]*A[2][0]);
+    adj[2][2] =   (A[0][0]*A[1][1] - A[0][1]*A[1][0]);
+
+    // Transpose of cofactor matrix = adj(A)
+    float temp;
+    temp = adj[0][1]; adj[0][1] = adj[1][0]; adj[1][0] = temp;
+    temp = adj[0][2]; adj[0][2] = adj[2][0]; adj[2][0] = temp;
+    temp = adj[1][2]; adj[1][2] = adj[2][1]; adj[2][1] = temp;
+}
+
+// Function to find inverse of 3x3 matrix
+int inverse(float A[3][3], float inv[3][3]) {
+    float det = determinant(A);
+    if (det == 0) {
+        printf("Matrix is singular, no inverse exists.\n");
+        return 0;
+    }
+
+    float adj[3][3];
+    adjoint(A, adj);
+
+    for (int i=0; i<3; i++)
+        for (int j=0; j<3; j++)
+            inv[i][j] = adj[i][j] / det;
+
+    return 1;
+}
+
+// Multiply 3x3 matrix with 3x1 vector
+void multiply(float A[3][3], float b[3], float x[3]) {
+    for (int i=0; i<3; i++) {
+        x[i] = 0;
+        for (int j=0; j<3; j++)
+            x[i] += A[i][j] * b[j];
+    }
+}
+
+int main() {
+    // Define A and b
+    float A[3][3] = {
+        {1, 2, -3},
+        {2, 0, -3},
+        {1, 2,  0}
+    };
+    float b[3] = {1, 2, 3};
+    float invA[3][3], x[3];
+
+    // Find inverse
+    if (inverse(A, invA)) {
+        // Solve x = A^{-1} b
+        multiply(invA, b, x);
+
+        printf("Solution:\n");
+        printf("x = %.3f\n", x[0]);
+        printf("y = %.3f\n", x[1]);
+        printf("z = %.3f\n", x[2]);
+    }
+
+    return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{C Code}
+\begin{lstlisting}[language=C]
+
+
+    adj[1][0] = - (A[1][0]*A[2][2] - A[1][2]*A[2][0]);
+    adj[1][1] =   (A[0][0]*A[2][2] - A[0][2]*A[2][0]);
+    adj[1][2] = - (A[0][0]*A[1][2] - A[0][2]*A[1][0]);
+
+    adj[2][0] =   (A[1][0]*A[2][1] - A[1][1]*A[2][0]);
+    adj[2][1] = - (A[0][0]*A[2][1] - A[0][1]*A[2][0]);
+    adj[2][2] =   (A[0][0]*A[1][1] - A[0][1]*A[1][0]);
+
+    // Transpose of cofactor matrix = adj(A)
+    float temp;
+    temp = adj[0][1]; adj[0][1] = adj[1][0]; adj[1][0] = temp;
+    temp = adj[0][2]; adj[0][2] = adj[2][0]; adj[2][0] = temp;
+    temp = adj[1][2]; adj[1][2] = adj[2][1]; adj[2][1] = temp;
+}
+
+// Function to find inverse of 3x3 matrix
+int inverse(float A[3][3], float inv[3][3]) {
+    float det = determinant(A);
+    if (det == 0) {
+        printf("Matrix is singular, no inverse exists.\n");
+        return 0;
+    }
+
+    float adj[3][3];
+    adjoint(A, adj);
+
+    for (int i=0; i<3; i++)
+        for (int j=0; j<3; j++)
+            inv[i][j] = adj[i][j] / det;
+
+    return 1;
+}
+
+// Multiply 3x3 matrix with 3x1 vector
+void multiply(float A[3][3], float b[3], float x[3]) {
+    for (int i=0; i<3; i++) {
+        x[i] = 0;
+        for (int j=0; j<3; j++)
+            x[i] += A[i][j] * b[j];
+    }
+}
+
+int main() {
+    // Define A and b
+    float A[3][3] = {
+        {1, 2, -3},
+        {2, 0, -3},
+        {1, 2,  0}
+    };
+    float b[3] = {1, 2, 3};
+    float invA[3][3], x[3];
+
+    // Find inverse
+    if (inverse(A, invA)) {
+        // Solve x = A^{-1} b
+        multiply(invA, b, x);
+
+        printf("Solution:\n");
+        printf("x = %.3f\n", x[0]);
+        printf("y = %.3f\n", x[1]);
+        printf("z = %.3f\n", x[2]);
+    }
+
+    return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{C Code}
+\begin{lstlisting}[language=C]
+// Function to find inverse of 3x3 matrix
+int inverse(float A[3][3], float inv[3][3]) {
+    float det = determinant(A);
+    if (det == 0) {
+        printf("Matrix is singular, no inverse exists.\n");
+        return 0;
+    }
+
+    float adj[3][3];
+    adjoint(A, adj);
+
+    for (int i=0; i<3; i++)
+        for (int j=0; j<3; j++)
+            inv[i][j] = adj[i][j] / det;
+
+    return 1;
+}
+
+// Multiply 3x3 matrix with 3x1 vector
+void multiply(float A[3][3], float b[3], float x[3]) {
+    for (int i=0; i<3; i++) {
+        x[i] = 0;
+        for (int j=0; j<3; j++)
+            x[i] += A[i][j] * b[j];
+    }
+}
+
+int main() {
+    // Define A and b
+    float A[3][3] = {
+        {1, 2, -3},
+        {2, 0, -3},
+        {1, 2,  0}
+    };
+    float b[3] = {1, 2, 3};
+    float invA[3][3], x[3];
+
+    // Find inverse
+    if (inverse(A, invA)) {
+        // Solve x = A^{-1} b
+        multiply(invA, b, x);
+
+        printf("Solution:\n");
+        printf("x = %.3f\n", x[0]);
+        printf("y = %.3f\n", x[1]);
+        printf("z = %.3f\n", x[2]);
+    }
+
+    return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{C Code}
+\begin{lstlisting}[language=C]
+
+
+// Multiply 3x3 matrix with 3x1 vector
+void multiply(float A[3][3], float b[3], float x[3]) {
+    for (int i=0; i<3; i++) {
+        x[i] = 0;
+        for (int j=0; j<3; j++)
+            x[i] += A[i][j] * b[j];
+    }
+}
+
+int main() {
+    // Define A and b
+    float A[3][3] = {
+        {1, 2, -3},
+        {2, 0, -3},
+        {1, 2,  0}
+    };
+    float b[3] = {1, 2, 3};
+    float invA[3][3], x[3];
+
+    // Find inverse
+    if (inverse(A, invA)) {
+        // Solve x = A^{-1} b
+        multiply(invA, b, x);
+
+        printf("Solution:\n");
+        printf("x = %.3f\n", x[0]);
+        printf("y = %.3f\n", x[1]);
+        printf("z = %.3f\n", x[2]);
+    }
+
+    return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{C Code}
+\begin{lstlisting}[language=C]
+
+    float invA[3][3], x[3];
+
+    // Find inverse
+    if (inverse(A, invA)) {
+        // Solve x = A^{-1} b
+        multiply(invA, b, x);
+
+        printf("Solution:\n");
+        printf("x = %.3f\n", x[0]);
+        printf("y = %.3f\n", x[1]);
+        printf("z = %.3f\n", x[2]);
+    }
+
+    return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Plot}
+    \centering
+    \includegraphics[width=\columnwidth, height=0.8\textheight, keepaspectratio]{beamer/figs/fig1.png}     
+\end{frame}
+
+\end{document}

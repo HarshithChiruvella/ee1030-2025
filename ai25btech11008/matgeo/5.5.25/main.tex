@@ -1,0 +1,151 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+\usepackage{tfrupee}
+\setlength{\headheight}{1cm}
+\setlength{\headsep}{0mm}
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{multicol}
+
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{2cm}
+
+\title{5.5.25}
+\author{AI25BTECH11008 - Chiruvella Harshith Sharan}
+{\let\newpage\relax\maketitle}
+
+\textbf{Question:} \\
+
+If
+\[
+A = \myvec{
+1 & 2 & -3\\
+2 & 0 & -3\\
+1 & 2 & 0
+}
+\]
+then find \(A^{-1}\) and use it to solve the system
+\[
+x + 2y - 3z = 1,\qquad 2x - 3z = 2,\qquad x + 2y = 3.
+\]
+
+\vspace{0.3cm}
+\textbf{Solution:}
+
+\subsection*{Step 1: Matrix form}
+Write the system as a matrix equation
+\[
+A\vec{x} = \vec{b}. \tag{1}
+\]
+Here
+\[
+\vec{x} = \myvec{x\\y\\z},\qquad \vec{b}=\myvec{1\\2\\3}. \tag{2}
+\]
+
+\subsection*{Step 2: Compute \(\det(A)\) and the adjugate}
+We compute the determinant by expansion (first row):
+\[
+\det(A)=
+1\cdot\det\myvec{0 & -3\\[2pt] 2 & 0}
+-2\cdot\det\myvec{2 & -3\\[2pt] 1 & 0}
+-3\cdot\det\myvec{2 & 0\\[2pt] 1 & 2}
+=1\cdot 6 -2\cdot 3 -3\cdot 4 = -12.
+\]
+
+Next compute the matrix of cofactors (each entry is the signed minor). The cofactor matrix \(C\) is
+\[
+C = \myvec{
+\;6 & -3 & \;4\\[4pt]
+-6 & \;3 & \;0\\[4pt]
+-6 & -3 & -4
+}.
+\]
+The adjugate is the transpose of \(C\):
+\[
+\operatorname{adj}(A)=C^{\mathsf T}=
+\myvec{
+6 & -6 & -6\\[4pt]
+-3 & 3 & -3\\[4pt]
+4 & 0 & -4
+}. \tag{3}
+\]
+
+\subsection*{Step 3: Inverse from adjugate and determinant}
+Using \(A^{-1}=\dfrac{1}{\det(A)}\operatorname{adj}(A)\) we get
+\[
+A^{-1}=\frac{1}{-12}
+\myvec{
+6 & -6 & -6\\
+-3 & 3 & -3\\
+4 & 0 & -4
+}
+=
+\myvec{
+-\tfrac{1}{2} & \tfrac{1}{2} & \tfrac{1}{2}\\[4pt]
+\tfrac{1}{4} & -\tfrac{1}{4} & \tfrac{1}{4}\\[4pt]
+-\tfrac{1}{3} & 0 & \tfrac{1}{3}
+}. \tag{4}
+\]
+
+\subsection*{Step 4: Solve \(\vec{x}=A^{-1}\vec{b}\)}
+Multiply to obtain the solution:
+\[
+\vec{x}=A^{-1}\vec{b}
+=
+\myvec{
+-\tfrac{1}{2} & \tfrac{1}{2} & \tfrac{1}{2}\\[4pt]
+\tfrac{1}{4} & -\tfrac{1}{4} & \tfrac{1}{4}\\[4pt]
+-\tfrac{1}{3} & 0 & \tfrac{1}{3}
+}
+\myvec{1\\2\\3}
+=
+\myvec{2\\[4pt]\tfrac{1}{2}\\[4pt]\tfrac{2}{3}}.
+\]
+
+\subsection*{Final Answer:}
+\[
+\boxed{x=2,\quad y=\tfrac{1}{2},\quad z=\tfrac{2}{3}}
+\]
+
+Below is a schematic TikZ illustration projecting the first two components of the vectors (a projection to the $xy$--plane for visualization). The algebraic relation is exact in $\mathbb{R}^3$; the drawing is only a 2D aid.
+\begin{figure}[h!]
+\centering \begin{tikzpicture}[scale=1.0]
+% axes 
+\draw[->] (-1,0) -- (5,0) node[right] {$x$};
+\draw[->] (0,-4) -- (0,4) node[above] {$y$};
+% column vectors (projected to xy-plane using first two components) 
+\draw[->, very thick, blue] (0,0) -- (1,2) node[midway, above left] {$\mathbf{a}_1=(1,2,1)$}; \draw[->, very thick, green!60!black] (0,0) -- (2,0) node[midway, below] {$\mathbf{a}_2=(2,0,2)$}; \draw[->, very thick, red] (0,0) -- (-3,-3) node[midway, below left] {$\mathbf{a}_3=(-3,-3,0)$}; 
+% scaled vectors (showing coefficients) 
+\draw[->, dashed, blue] (0,0) -- (2,4) node[near end, right] {$2\mathbf{a}_1$}; 
+\draw[->, dashed, green!60!black] (2,0) -- (3,0) node[midway, above] {$\tfrac{1}{2}\mathbf{a}_2$}; % this is from a2 tip for illustration
+\draw[->, dashed, red] (0,0) -- (-2,-2) node[near end, left] {$\tfrac{2}{3}\mathbf{a}_3$};
+% b (projected) 
+\draw[->, thick, purple] (0,0) -- (1,2) node[midway, above right] {$\mathbf{b}=(1,2,3)$};
+% legend (simple)
+\node[anchor=west] at (3.2,3.2) {\small Linear combination: $2\mathbf{a}_1+\tfrac{1}{2}\mathbf{a}_2+\tfrac{2}{3}\mathbf{a}_3=\mathbf{b}$};
+\node[anchor=west] at (3.2,2.6) {\small (projection shown for visualization only)};
+\end{tikzpicture} 
+\caption{Schematic (projection) showing column vectors of $A$ and the right-hand side $\mathbf{b}$.} 
+\end{figure}
+
+\end{document}
+
+
+

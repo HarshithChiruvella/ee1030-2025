@@ -1,0 +1,19 @@
+\frametitle{C Code}
+\begin{lstlisting}[language=C]
+
+    float invA[3][3], x[3];
+
+    // Find inverse
+    if (inverse(A, invA)) {
+        // Solve x = A^{-1} b
+        multiply(invA, b, x);
+
+        printf("Solution:\n");
+        printf("x = %.3f\n", x[0]);
+        printf("y = %.3f\n", x[1]);
+        printf("z = %.3f\n", x[2]);
+    }
+
+    return 0;
+}
+\end{lstlisting}
