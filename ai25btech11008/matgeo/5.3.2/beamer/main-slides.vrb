@@ -1,0 +1,22 @@
+\frametitle{C Code}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+    double a1=9, b1=10, c1=42;
+    double a2=9, b2=10, c2=14;
+
+    double r1 = a1/a2;
+    double r2 = b1/b2;
+    double r3 = c1/c2;
+
+    if(r1 == r2 && r2 == r3)
+        printf("Consistent: Infinite solutions\n");
+    else if(r1 == r2 && r2 != r3)
+        printf("Inconsistent system (No solution)\n");
+    else
+        printf("Consistent: Unique solution\n");
+
+    return 0;
+}
+\end{lstlisting}

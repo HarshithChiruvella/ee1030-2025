@@ -1,0 +1,103 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+\usepackage{tfrupee} 
+
+\setlength{\headheight}{1cm} 
+\setlength{\headsep}{0mm}     
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,angles,quotes}
+
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{5.3.2}
+\author{AI25BTECH11008 - Chiruvella Harshith Sharan}
+{\let\newpage\relax\maketitle}
+
+\setlength{\intextsep}{10pt} 
+\numberwithin{equation}{enumi}
+
+\textbf{Question:} \\
+
+\vspace{0.3cm}
+
+The pair of linear equations 
+\[
+\frac{3x}{2} + \frac{5y}{3} = 7 
+\quad \text{and} \quad 
+9x + 10y = 14
+\]
+is 
+
+\begin{enumerate}[label=(\alph*)]
+\item consistent 
+\item inconsistent 
+\item consistent with one solution 
+\item consistent with many solutions
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\textbf{Solution:}
+
+\subsection*{Step 1: Clear fractions and write augmented matrix}
+
+Multiply the first equation by $6$ to clear fractions, obtaining $9x+10y=42$. We now have
+\begin{align}
+9x + 10y &= 42 \tag{1}\\
+9x + 10y &= 14 \tag{2}
+\end{align}
+The corresponding augmented matrix is
+\begin{align}
+\begin{pmatrix}
+9 & 10 & \vline & 42\\[2pt]
+9 & 10 & \vline & 14
+\end{pmatrix}. \tag{3}
+\end{align}
+
+\subsection*{Step 2: Row operation to check consistency}
+
+Perform the row operation $R_2 \leftarrow R_2 - R_1$ to eliminate the coefficients:
+\begin{align}
+\begin{pmatrix}
+9 & 10 & \vline & 42\\[2pt]
+0 & 0  & \vline & -28
+\end{pmatrix}. \tag{4}
+\end{align}
+
+The second row corresponds to $0x+0y=-28$, which is impossible. Hence the system has no solution.
+
+\subsection*{Final Answer:}
+
+\[
+\boxed{\text{The system is inconsistent.}}
+\]
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figs/fig1.png}
+    \caption{Graph of the lines $9x+10y=42$ and $9x+10y=14$.}
+    \label{fig:lines}
+\end{figure}
+
+
+\end{document}

@@ -1,0 +1,166 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{txfonts}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{lmodern}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\lstset{
+    language=C,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{orange},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    showstringspaces=false,
+}
+
+
+\title{5.3.2}
+\author{Chiruvella Harshith Sharan - AI25BTECH11008}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%------------------------------------
+
+\begin{frame}{Question}
+The pair of linear equations
+\[
+\frac{3x}{2} + \frac{5y}{3} = 7 
+\quad \text{and} \quad 
+9x + 10y = 14
+\]
+is
+
+\begin{enumerate}[label=(\alph*)]
+\item consistent 
+\item inconsistent 
+\item consistent with one solution 
+\item consistent with many solutions
+\end{enumerate}
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Step 1: Clear Fractions}
+Multiply the first equation by $6$:
+\[
+9x + 10y = 42 \tag{1}
+\]
+The second equation is
+\[
+9x + 10y = 14 \tag{2}
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Step 2: Augmented Matrix}
+The system can be written as:
+\[
+\begin{pmatrix}
+9 & 10 & \vline & 42 \\
+9 & 10 & \vline & 14
+\end{pmatrix} \tag{3}
+\]
+Subtracting $R_1$ from $R_2$:
+\[
+\begin{pmatrix}
+9 & 10 & \vline & 42 \\
+0 & 0 & \vline & -28
+\end{pmatrix} \tag{4}
+\]
+This implies $0x + 0y = -28$, which is a contradiction.
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Step 3: Conclusion}
+Therefore, the two equations represent **parallel distinct lines**.
+
+\[
+\boxed{\text{The system is inconsistent.}}
+\]
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}[fragile]{Python Code}
+\begin{lstlisting}[language=Python]
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define x-range
+x = np.linspace(-5, 10, 400)
+
+# Define the two lines: y = (constant - 9x)/10
+y1 = (42 - 9*x) / 10   # from 9x + 10y = 42
+y2 = (14 - 9*x) / 10   # from 9x + 10y = 14
+
+# Plotting
+plt.figure(figsize=(6,6))
+plt.plot(x, y1, label=r'$9x+10y=42$', color='blue')
+plt.plot(x, y2, label=r'$9x+10y=14$', color='red')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.axhline(0, color='black', linewidth=0.5)  # x-axis
+plt.axvline(0, color='black', linewidth=0.5)  # y-axis
+plt.title('Lines: $9x+10y=42$ and $9x+10y=14$ (Parallel, no intersection)')
+plt.legend()
+plt.grid(True, linestyle='--', linewidth=0.3)
+
+plt.show()
+\end{lstlisting}
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}[fragile]{C Code}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+    double a1=9, b1=10, c1=42;
+    double a2=9, b2=10, c2=14;
+
+    double r1 = a1/a2;
+    double r2 = b1/b2;
+    double r3 = c1/c2;
+
+    if(r1 == r2 && r2 == r3)
+        printf("Consistent: Infinite solutions\n");
+    else if(r1 == r2 && r2 != r3)
+        printf("Inconsistent system (No solution)\n");
+    else
+        printf("Consistent: Unique solution\n");
+
+    return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+%------------------------------------
+
+\begin{frame}{Plot}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\linewidth]{beamer/figs/fig1.png}
+    \caption{Graph of the lines $9x+10y=42$ and $9x+10y=14$.}
+    \label{fig:lines}
+\end{figure}
+
+\end{frame}
+
+\end{document}
+
