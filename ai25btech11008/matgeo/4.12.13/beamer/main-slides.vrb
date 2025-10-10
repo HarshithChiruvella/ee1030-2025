@@ -11,6 +11,18 @@ int main() {
     double a = (2 * AD) / sqrt(3);
 
     printf("Side length = %lf\n", a);
+
+    // Base direction vector normalized
+    double mx=1/sqrt(2), my=-1/sqrt(2);
+
+    double Bx = Dx + (a/2)*mx;
+    double By = Dy + (a/2)*my;
+    double Cx = Dx - (a/2)*mx;
+    double Cy = Dy - (a/2)*my;
+
+    printf("B = (%lf,%lf)\n", Bx, By);
+    printf("C = (%lf,%lf)\n", Cx, Cy);
+
     return 0;
 }
 \end{lstlisting}

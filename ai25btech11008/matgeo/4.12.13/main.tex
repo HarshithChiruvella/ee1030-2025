@@ -3,7 +3,6 @@
 \documentclass[journal]{IEEEtran}
 \usepackage[a5paper, margin=10mm, onecolumn]{geometry}
 \usepackage{tfrupee} 
-
 \setlength{\headheight}{1cm} 
 \setlength{\headsep}{0mm}     
 \usepackage{gvv-book}
@@ -22,7 +21,6 @@
 \usepackage{comment}
 \usepackage[breaklinks=true]{hyperref}
 \usepackage{tkz-euclide} 
-\usepackage{listings}
 \def\inputGnumericTable{}                                 
 \usepackage[latin1]{inputenc}                                
 \usepackage{color}                                            
@@ -33,8 +31,6 @@
 \usepackage{hhline}                                           
 \usepackage{ifthen}                                           
 \usepackage{lscape}
-
-\usepackage{amsmath,amssymb}
 \usepackage{booktabs}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,angles,quotes}
@@ -58,84 +54,108 @@
 
 \textbf{Question:} \\
 
-\vspace{0.3cm}
+If the equation of the base of an equilateral triangle is $x+y=2$ and the vertex is $(2,-1)$, then find the length of the side of the triangle. Also find the other vertices.
 
-If the equation of the base of an equilateral triangle is $x+y=2$ and the vertex is $(2,-1)$, then find the length of the side of the triangle.
 \vspace{0.3cm}
-
 \textbf{Answer:}
 
-\subsection*{\textbf{Step 1: Represent the problem in vector form}}
+\subsection*{\textbf{Step 1: Represent line in matrix form}}
 
-The equation of the base of the triangle is
-\begin{align}
-\vec{n}^T \vec{x} = 2
-\end{align}
-where $\vec{n} = \begin{pmatrix}1 \\ 1\end{pmatrix}$ is the normal vector.  
-The vertex is 
+The line equation:
+\[
+x+y=2 \quad \implies \quad \vec{n}^T\vec{x} = 2,
+\]
+where
+\[
+\vec{n} = \begin{pmatrix}1 \\ 1\end{pmatrix}.
+\]
+
+Vertex:
 \[
 \vec{A} = \begin{pmatrix}2 \\ -1\end{pmatrix}.
 \]
 
-\subsection*{\textbf{Step 2: Foot of perpendicular from vertex to base}}
+\subsection*{\textbf{Step 2: Foot of perpendicular (matrix equation)}}
 
-The distance from $\vec{A}$ to the line is obtained by projecting $\vec{A}$ onto the normal:
-\begin{align}
-d = \frac{\vec{n}^T \vec{A} - 2}{\|\vec{n}\|} 
-= \frac{1\cdot 2 + 1\cdot (-1) - 2}{\sqrt{1^2+1^2}} 
-= \frac{-1}{\sqrt{2}}
-\end{align}
-
-Hence, the foot of perpendicular $\vec{D}$ is:
-\begin{align}
-\vec{D} = \vec{A} - d \frac{\vec{n}}{\|\vec{n}\|} 
-= \begin{pmatrix}2 \\ -1\end{pmatrix} - \left(-\tfrac{1}{\sqrt{2}}\right)\frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 1\end{pmatrix} 
-= \begin{pmatrix}2+\tfrac{1}{2} \\ -1+\tfrac{1}{2}\end{pmatrix}
-= \begin{pmatrix}\tfrac{5}{2} \\ -\tfrac{1}{2}\end{pmatrix}
-\end{align}
-
-\subsection*{\textbf{Step 3: Length relation in equilateral triangle}}
-
-In an equilateral triangle, the altitude length $AD$ is related to the side $a$ by:
-\begin{align}
-AD = \frac{\sqrt{3}}{2} a
-\end{align}
-
-Here $AD = \|\vec{A}-\vec{D}\|$.  
+The foot $\vec{D}$ is obtained by projecting $\vec{A}$ onto the line:
 
 \[
-AD = \sqrt{\left(2-\tfrac{5}{2}\right)^2 + \left(-1+\tfrac{1}{2}\right)^2}
-= \sqrt{\left(-\tfrac{1}{2}\right)^2 + \left(-\tfrac{1}{2}\right)^2}
-= \sqrt{\tfrac{1}{4}+\tfrac{1}{4}} 
-= \frac{1}{\sqrt{2}}
+\vec{D} = \vec{A} - \frac{\vec{n}^T\vec{A}-2}{\vec{n}^T\vec{n}}\vec{n}.
 \]
 
-\subsection*{\textbf{Step 4: Solve for side length}}
+Substitute:
+\[
+\vec{D} = \begin{pmatrix}2 \\ -1\end{pmatrix} - 
+\frac{(1)(2)+(1)(-1)-2}{1^2+1^2}\begin{pmatrix}1 \\ 1\end{pmatrix}
+= \begin{pmatrix}\tfrac{5}{2} \\ -\tfrac{1}{2}\end{pmatrix}.
+\]
 
-From (3):
-\begin{align}
-\frac{1}{\sqrt{2}} = \frac{\sqrt{3}}{2} a 
-\implies a = \frac{2}{\sqrt{2}\sqrt{3}} 
-= \sqrt{\frac{2}{3}}
-\end{align}
+\subsection*{\textbf{Step 3: Side length of equilateral triangle}}
+
+In an equilateral triangle, altitude $AD = \tfrac{\sqrt{3}}{2}a$.  
+
+Compute:
+\[
+AD = \|\vec{A}-\vec{D}\| = \sqrt{\left(2-\tfrac{5}{2}\right)^2 + \left(-1+\tfrac{1}{2}\right)^2} 
+= \frac{1}{\sqrt{2}}.
+\]
+
+So:
+\[
+\frac{1}{\sqrt{2}} = \frac{\sqrt{3}}{2}a \quad \implies \quad a = \sqrt{\tfrac{2}{3}}.
+\]
+
+\subsection*{\textbf{Step 4: Coordinates of other vertices}}
+
+Let $\vec{m}$ be a direction vector along the base line. Since $\vec{n}=(1,1)^T$, take
+\[
+\vec{m} = \begin{pmatrix}1 \\ -1\end{pmatrix}.
+\]
+
+Half the base length is $\tfrac{a}{2}$.  
+So, the base vertices are:
+\[
+\vec{B} = \vec{D} + \frac{a}{2}\frac{\vec{m}}{\|\vec{m}\|}, \quad 
+\vec{C} = \vec{D} - \frac{a}{2}\frac{\vec{m}}{\|\vec{m}\|}.
+\]
+
+Since $\|\vec{m}\| = \sqrt{2}$:
+\[
+\vec{B} = \begin{pmatrix}\tfrac{5}{2}\\ -\tfrac{1}{2}\end{pmatrix} + 
+\frac{\sqrt{2/3}}{2\sqrt{2}}\begin{pmatrix}1\\-1\end{pmatrix}
+= \begin{pmatrix}\tfrac{5}{2}+\tfrac{1}{2\sqrt{3}}\\ -\tfrac{1}{2}-\tfrac{1}{2\sqrt{3}}\end{pmatrix},
+\]
+
+\[
+\vec{C} = \begin{pmatrix}\tfrac{5}{2}\\ -\tfrac{1}{2}\end{pmatrix} - 
+\frac{1}{2\sqrt{3}}\begin{pmatrix}1\\-1\end{pmatrix}
+= \begin{pmatrix}\tfrac{5}{2}-\tfrac{1}{2\sqrt{3}}\\ -\tfrac{1}{2}+\tfrac{1}{2\sqrt{3}}\end{pmatrix}.
+\]
 
 \subsection*{Final Answer:}
 \[
-\boxed{a = \sqrt{\tfrac{2}{3}}}
+\text{Side length } a = \sqrt{\tfrac{2}{3}}, 
+\quad B = \left(\tfrac{5}{2}+\tfrac{1}{2\sqrt{3}}, -\tfrac{1}{2}-\tfrac{1}{2\sqrt{3}}\right), 
+\quad C = \left(\tfrac{5}{2}-\tfrac{1}{2\sqrt{3}}, -\tfrac{1}{2}+\tfrac{1}{2\sqrt{3}}\right).
 \]
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1]
+\begin{tikzpicture}[scale=2]
 \coordinate (A) at (2,-1);
 \coordinate (D) at (2.5,-0.5);
-\draw[thick] (-2,4) -- (4,-2) node[right]{$x+y=2$};
-\draw[thick] (A) -- (D);
-\fill (A) circle (2pt) node[below right] {$A(2,-1)$};
-\fill (D) circle (2pt) node[right] {$D$};
+\coordinate (B) at (2.5+0.2887,-0.5-0.2887); % approx numeric
+\coordinate (C) at (2.5-0.2887,-0.5+0.2887);
+
+\draw[thick] (-1,3) -- (3,-1) node[right]{$x+y=2$};
+\draw[thick] (A)--(B)--(C)--cycle;
+
+\fill (A) circle (1pt) node[below right] {$A(2,-1)$};
+\fill (B) circle (1pt) node[right] {$B$};
+\fill (C) circle (1pt) node[left] {$C$};
+\fill (D) circle (1pt) node[above right] {$D$};
 \end{tikzpicture}
-\caption{Geometry of equilateral triangle with base $x+y=2$}
+\caption{Equilateral triangle with base on $x+y=2$}
 \end{figure}
 
 \end{document}
-

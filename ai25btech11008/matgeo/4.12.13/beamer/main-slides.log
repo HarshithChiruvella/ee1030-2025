@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Termux) (preloaded format=pdflatex 2025.8.6)  2 OCT 2025 20:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Termux) (preloaded format=pdflatex 2025.8.6)  10 OCT 2025 19:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1416,7 +1416,7 @@ Overfull \hbox (5.45503pt too wide) has occurred while \output is active
 [5
 
 ]
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 98--98
+Overfull \hbox (5.45503pt too wide) in paragraph at lines 107--107
  [][]  
  []
 
@@ -1430,14 +1430,14 @@ Overfull \hbox (5.45503pt too wide) has occurred while \output is active
 [6
 
 ]
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 103--103
+Overfull \hbox (5.45503pt too wide) in paragraph at lines 110--110
  [][]  
  []
 
 \openout4 = `main-slides.vrb'.
 
 
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 124--124
+Overfull \hbox (5.45503pt too wide) in paragraph at lines 130--130
  [][]  
  []
 
@@ -1463,18 +1463,22 @@ Overfull \hbox (5.45503pt too wide) has occurred while \output is active
 
 {/data/data/com.termux/files/usr/share/texlive/2025/texmf-dist/fonts/enc/dvips/
 lm/lm-rmtt.enc}]
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 127--127
+Overfull \hbox (5.45503pt too wide) in paragraph at lines 133--133
  [][]  
  []
 
 \openout4 = `main-slides.vrb'.
 
 
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 148--148
+Overfull \hbox (5.45503pt too wide) in paragraph at lines 157--157
  [][]  
  []
 
 (./main-slides.vrb)
+Overfull \vbox (33.52928pt too high) detected at line 157
+ []
+
+
 
 
 Overfull \hbox (5.45503pt too wide) has occurred while \output is active
@@ -1484,18 +1488,22 @@ Overfull \hbox (5.45503pt too wide) has occurred while \output is active
 [8
 
 ]
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 150--150
+Overfull \hbox (5.45503pt too wide) in paragraph at lines 160--160
  [][]  
  []
 
 \openout4 = `main-slides.vrb'.
 
 
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 168--168
+Overfull \hbox (5.45503pt too wide) in paragraph at lines 188--188
  [][]  
  []
 
 (./main-slides.vrb)
+Overfull \vbox (93.52928pt too high) detected at line 188
+ []
+
+
 
 
 Overfull \hbox (5.45503pt too wide) has occurred while \output is active
@@ -1505,54 +1513,12 @@ Overfull \hbox (5.45503pt too wide) has occurred while \output is active
 [9
 
 ]
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 170--170
- [][]  
- []
-
-\openout4 = `main-slides.vrb'.
-
-
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 189--189
- [][]  
- []
-
-(./main-slides.vrb)
-
-
-Overfull \hbox (5.45503pt too wide) has occurred while \output is active
- [][]  
- []
-
-[10
-
-]
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 192--192
- [][]  
- []
-
-\openout4 = `main-slides.vrb'.
-
-
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 208--208
- [][]  
- []
-
-(./main-slides.vrb)
-
-
-Overfull \hbox (5.45503pt too wide) has occurred while \output is active
- [][]  
- []
-
-[11
-
-]
-Overfull \hbox (5.45503pt too wide) in paragraph at lines 214--214
+Overfull \hbox (5.45503pt too wide) in paragraph at lines 194--194
  [][]  
  []
 
 
-LaTeX Warning: File `beamer/figs/fig1.png' not found on input line 214.
+LaTeX Warning: File `beamer/figs/fig1.png' not found on input line 194.
 
 
 ! Package pdftex.def Error: File `beamer/figs/fig1.png' not found: using draft 
@@ -1562,7 +1528,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.214 \end{frame}
+l.194 \end{frame}
                  
 ? <return>
 Type <return> to proceed, S to scroll future error messages,
@@ -1579,7 +1545,7 @@ Overfull \hbox (5.45503pt too wide) has occurred while \output is active
  [][]  
  []
 
-[12
+[10
 
 ]
 \tf@nav=\write6
@@ -1607,13 +1573,13 @@ Package rerunfilecheck Info: Checksums for `main-slides.out':
 (rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 27552 strings out of 467801
- 542399 string characters out of 5417843
- 1186961 words of memory out of 5000000
- 55608 multiletter control sequences out of 15000+600000
+ 27550 strings out of 467801
+ 542260 string characters out of 5417843
+ 1242240 words of memory out of 5000000
+ 55614 multiletter control sequences out of 15000+600000
  660042 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,15n,123p,413b,1418s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,15n,123p,413b,1391s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </data/data/com.termux/files/usr/share/texlive/2025/texmf-dist/fonts/type1/pu
 blic/lm/lmex10.pfb></data/data/com.termux/files/usr/share/texlive/2025/texmf-di
 st/fonts/type1/public/lm/lmmi10.pfb></data/data/com.termux/files/usr/share/texl
@@ -1624,11 +1590,13 @@ s8.pfb></data/data/com.termux/files/usr/share/texlive/2025/texmf-dist/fonts/typ
 e1/public/lm/lmsso10.pfb></data/data/com.termux/files/usr/share/texlive/2025/te
 xmf-dist/fonts/type1/public/lm/lmsso8.pfb></data/data/com.termux/files/usr/shar
 e/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></data/data/com.term
-ux/files/usr/share/texlive/2025/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on main-slides.pdf (12 pages, 167715 bytes).
+ux/files/usr/share/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></da
+ta/data/com.termux/files/usr/share/texlive/2025/texmf-dist/fonts/type1/public/l
+m/lmtt10.pfb>
+Output written on main-slides.pdf (10 pages, 165177 bytes).
 PDF statistics:
- 420 PDF objects out of 1000 (max. 8388607)
- 354 compressed objects within 4 object streams
- 25 named destinations out of 1000 (max. 500000)
+ 368 PDF objects out of 1000 (max. 8388607)
+ 306 compressed objects within 4 object streams
+ 21 named destinations out of 1000 (max. 500000)
  79 words of extra memory for PDF output out of 10000 (max. 10000000)
 
